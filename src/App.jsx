@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.scss';
 
 export class App extends React.Component {
 
@@ -12,7 +13,7 @@ export class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="App">
                 <h1>Counter</h1>
                 <p>Counter: <span style={{ color: '#f00' }}>{this.state.counter}</span></p>
                 <button onClick={() => this.increment()}>Increment</button>

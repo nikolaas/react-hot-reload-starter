@@ -2,7 +2,15 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const onlyProd = require('./helpers/onlyProd');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const { enableInProd, enablePluginInProd } = require('./helpers/switchers');
+const { extractProdCss, extractDevCss } = require('./helpers/exctact-css');
+
+const vendorsCssExtractor = new ExtractTextPlugin('[name].[contenthash].css');
+const appCssExtractor = new ExtractTextPlugin('[name].[contenthash].css');
+const extractVendorCss = enableInProd(extractProdCss(vendorsCssExtractor), extractDevCss);
+const extractAppCss = enableInProd(extractProdCss(appCssExtractor), extractDevCss);
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -55,6 +63,44 @@ module.exports = {
                     },
                 }
             },
+            {
+                test: /\.css/,
+                include: /node_modules/,
+                use: extractVendorCss([
+                    {
+                        loader: 'style-loader',
+                        options: {
+                            sourceMap: true,
+                            hmr: false,
+                        }
+                    },
+                    { loader: 'css-loader', options: { sourceMap: true } },
+                ])
+            },
+            {
+                test: /\.scss/,
+                include: path.join(__dirname, 'src'),
+                use: extractAppCss([
+                    { loader: 'style-loader', options: { sourceMap: true } },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: NODE_ENV === 'production',
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                            plugins: [
+                                autoprefixer,
+                            ]
+                        }
+                    },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                ])
+            }
         ]
     },
     optimization: {
@@ -63,12 +109,14 @@ module.exports = {
         },
     },
     plugins: [
-        ...onlyProd(new CleanWebpackPlugin(['dist'])),
-        ...onlyProd(new webpack.NoEmitOnErrorsPlugin()),
+        ...enablePluginInProd(new CleanWebpackPlugin(['dist'])),
+        ...enablePluginInProd(new webpack.NoEmitOnErrorsPlugin()),
         new webpack.DefinePlugin(globalConstants),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
+        ...enablePluginInProd(vendorsCssExtractor),
+        ...enablePluginInProd(appCssExtractor),
     ],
     devtool: 'source-map',
     devServer: {
