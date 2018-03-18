@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "npm run lint && npm run test && cross-env NODE_ENV=production webpack",
     "build:dev": "cross-env NODE_ENV=development webpack",
     "test": "jest",
     "lint": "eslint --ext .js --ext .jsx src test"
