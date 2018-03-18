@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const onlyProd = require('./helpers/onlyProd');
@@ -27,15 +28,29 @@ module.exports = {
     module: {
         rules: [
             {
+                enforce: "pre",
+                test: /\.jsx?$/,
+                include: path.join(__dirname, 'src'),
+                loader: {
+                    loader: 'eslint-loader',
+                    options: {
+                        emitWarning: NODE_ENV === 'development',
+                        emitError: NODE_ENV === 'production',
+                        failOnWarning: NODE_ENV === 'production',
+                        failOnError: NODE_ENV === 'production',
+                    },
+                }
+            },
+            {
                 test: /\.jsx?$/,
                 include: path.join(__dirname, 'src'),
                 use: {
                     loader: 'babel-loader',
                     options: {
                         cacheDirectory: true,
-                    }
+                    },
                 }
-            }
+            },
         ]
     },
     optimization: {
@@ -45,6 +60,7 @@ module.exports = {
     },
     plugins: [
         ...onlyProd(new CleanWebpackPlugin(['dist'])),
+        ...onlyProd(new webpack.NoEmitOnErrorsPlugin()),
         // new webpack.optimize.CommonsChunkPlugin({names: ['vendors'], minChunks: Infinity}),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
