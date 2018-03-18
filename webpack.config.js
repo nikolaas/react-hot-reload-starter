@@ -4,7 +4,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const onlyProd = require('./helpers/onlyProd');
 
-const NODE_ENV = process.env.NODE_ENV;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const globalConstants = {
+    'process.env.NODE_ENV': `"${NODE_ENV}"`,
+};
 
 module.exports = {
     mode: NODE_ENV,
@@ -61,7 +65,7 @@ module.exports = {
     plugins: [
         ...onlyProd(new CleanWebpackPlugin(['dist'])),
         ...onlyProd(new webpack.NoEmitOnErrorsPlugin()),
-        // new webpack.optimize.CommonsChunkPlugin({names: ['vendors'], minChunks: Infinity}),
+        new webpack.DefinePlugin(globalConstants),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
