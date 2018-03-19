@@ -14,7 +14,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <h1>Counter</h1>
+                <h1>Counter {process.env.VERSION}</h1>
                 <p>Counter: <span style={{ color: '#f00' }}>{this.state.counter}</span></p>
                 <button onClick={() => this.increment()}>Increment</button>
             </div>
