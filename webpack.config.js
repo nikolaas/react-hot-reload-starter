@@ -6,16 +6,24 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const { enableInProd, enablePluginInProd } = require('./helpers/switchers');
 const { extractProdCss, extractDevCss } = require('./helpers/exctact-css');
+const getVersion = require('./helpers/get-version');
 
-const vendorsCssExtractor = new ExtractTextPlugin('css/[name].[contenthash].css');
-const appCssExtractor = new ExtractTextPlugin('css/[name].[contenthash].css');
-const extractVendorCss = enableInProd(extractProdCss(vendorsCssExtractor, 'css'), extractDevCss);
-const extractAppCss = enableInProd(extractProdCss(appCssExtractor, 'css'), extractDevCss);
-
+/** Тип сборки: production или development */
 const NODE_ENV = process.env.NODE_ENV || 'development';
+/** Версия приложения */
+const VERSION = getVersion();
+
+const jsOutputFilename = enableInProd(`js/[name].js?hash=${VERSION}`, '[name].js?hash=[hash]');
+const cssOutputFilename = enableInProd(`css/[name].css?hash=${VERSION}`, '[name].js?hash=[contenthash]');
+
+const vendorsCssExtractor = new ExtractTextPlugin(cssOutputFilename);
+const appCssExtractor = new ExtractTextPlugin(cssOutputFilename);
+const extractVendorCss = enableInProd(extractProdCss(vendorsCssExtractor), extractDevCss);
+const extractAppCss = enableInProd(extractProdCss(appCssExtractor), extractDevCss);
 
 const globalConstants = {
     'process.env.NODE_ENV': `"${NODE_ENV}"`,
+    'process.env.VERSION': `"${VERSION}"`,
 };
 
 module.exports = {
@@ -31,7 +39,7 @@ module.exports = {
         ],
     },
     output: {
-        filename: 'js/[name].js',
+        filename: jsOutputFilename,
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
