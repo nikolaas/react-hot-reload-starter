@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { increment } from './actions';
 import './App.scss';
 
-class App extends React.Component {
+export class RawApp extends React.Component {
 
     static propTypes = {
         counter: PropTypes.number,
@@ -37,4 +37,4 @@ const mapDispatchToProps = {
     onIncrement: increment,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(RawApp);

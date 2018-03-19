@@ -1,3 +1,3 @@
-import { increment } from './increment-action';
+import { increment } from './counter-actions';
 
 export { increment };
