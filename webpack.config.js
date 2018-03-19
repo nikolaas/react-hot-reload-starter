@@ -127,7 +127,7 @@ module.exports = {
         ...enablePluginInProd(vendorsCssExtractor),
         ...enablePluginInProd(appCssExtractor),
     ],
-    devtool: 'source-map',
+    devtool: enableInProd('source-map', 'cheap-module-eval-source-map'),
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
