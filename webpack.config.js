@@ -78,7 +78,7 @@ module.exports = {
                     {
                         loader: 'style-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap: false,
                             hmr: false,
                         }
                     },
