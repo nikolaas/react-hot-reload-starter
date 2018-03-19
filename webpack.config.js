@@ -7,10 +7,10 @@ const autoprefixer = require('autoprefixer');
 const { enableInProd, enablePluginInProd } = require('./helpers/switchers');
 const { extractProdCss, extractDevCss } = require('./helpers/exctact-css');
 
-const vendorsCssExtractor = new ExtractTextPlugin('[name].[contenthash].css');
-const appCssExtractor = new ExtractTextPlugin('[name].[contenthash].css');
-const extractVendorCss = enableInProd(extractProdCss(vendorsCssExtractor), extractDevCss);
-const extractAppCss = enableInProd(extractProdCss(appCssExtractor), extractDevCss);
+const vendorsCssExtractor = new ExtractTextPlugin('css/[name].[contenthash].css');
+const appCssExtractor = new ExtractTextPlugin('css/[name].[contenthash].css');
+const extractVendorCss = enableInProd(extractProdCss(vendorsCssExtractor, 'css'), extractDevCss);
+const extractAppCss = enableInProd(extractProdCss(appCssExtractor, 'css'), extractDevCss);
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -31,8 +31,8 @@ module.exports = {
         ],
     },
     output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        filename: 'js/[name].js',
+        path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
         extensions: ['.js', '.jsx', '.json']
@@ -114,6 +114,7 @@ module.exports = {
         new webpack.DefinePlugin(globalConstants),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
+            favicon: path.resolve(__dirname, 'public', 'favicon.ico')
         }),
         ...enablePluginInProd(vendorsCssExtractor),
         ...enablePluginInProd(appCssExtractor),
