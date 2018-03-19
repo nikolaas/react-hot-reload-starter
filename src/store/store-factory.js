@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
     };
 }
 
-export const configureStore = (rootReducer, initialState) => {
+export default (rootReducer, initialState) => {
     const enhancers = [applyMiddleware(thunk)];
     return storeFactory(rootReducer, initialState, enhancers);
 };

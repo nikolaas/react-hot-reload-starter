@@ -8,6 +8,8 @@ const { enableInProd, enablePluginInProd } = require('./helpers/switchers');
 const { extractProdCss, extractDevCss } = require('./helpers/exctact-css');
 const getVersion = require('./helpers/get-version');
 
+/** Контекстный путь, на котором развернуто приложение. Должен указываться без завершающего слэша! */
+const APP_BASE_URL = process.env.APP_BASE_URL || '';
 /** Тип сборки: production или development */
 const NODE_ENV = process.env.NODE_ENV || 'development';
 /** Версия приложения */
@@ -24,6 +26,7 @@ const extractAppCss = enableInProd(extractProdCss(appCssExtractor), extractDevCs
 const globalConstants = {
     'process.env.NODE_ENV': `"${NODE_ENV}"`,
     'process.env.VERSION': `"${VERSION}"`,
+    'process.env.APP_BASE_URL': `"${APP_BASE_URL}"`,
 };
 
 module.exports = {
@@ -122,7 +125,8 @@ module.exports = {
         new webpack.DefinePlugin(globalConstants),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
-            favicon: path.resolve(__dirname, 'public', 'favicon.ico')
+            favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
+            baseUrl: `${APP_BASE_URL}/`
         }),
         ...enablePluginInProd(vendorsCssExtractor),
         ...enablePluginInProd(appCssExtractor),
@@ -131,6 +135,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
-        port: 9000
+        port: 9000,
+        historyApiFallback: true,
     }
 };

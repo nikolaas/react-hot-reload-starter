@@ -1,6 +1,6 @@
-import { increment } from '../../src/actions';
+import { increment } from '../../../src/routes/SyncCounter/SyncCounter.actions';
 
-describe('counter actions tests', () => {
+describe('sync counter actions tests', () => {
     it('should create an action to increment the counter to the default value', () => {
         expect(increment()).toEqual({ type: 'increment', payload: 1 });
     });

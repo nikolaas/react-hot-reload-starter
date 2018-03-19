@@ -1,3 +1,3 @@
-import { configureStore } from './configure-store';
+import { configureStore, registerAsyncReducer } from './store';
 
-export { configureStore };
+export { configureStore, registerAsyncReducer };

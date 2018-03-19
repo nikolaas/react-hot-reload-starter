@@ -2,18 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from './store';
-import { rootReducer } from './reducers';
+import { createReducer } from './reducers';
 import App from './App';
 
-const store = configureStore(rootReducer);
+const store = configureStore(createReducer());
 
 const render = Component => {
     ReactDOM.render(
         <AppContainer>
-            <Provider store={store}>
-                <Component/>
-            </Provider>
+            <BrowserRouter basename={process.env.APP_BASE_URL}>
+                <Provider store={store}>
+                    <Component/>
+                </Provider>
+            </BrowserRouter>
         </AppContainer>,
         document.getElementById('root'),
     );
@@ -29,7 +32,7 @@ if (module.hot) {
 
     // Hot reload reducers
     module.hot.accept('./reducers', () => {
-        store.replaceReducer(rootReducer);
+        store.replaceReducer(createReducer());
     });
 
     //TODO reload store on update "./store" module
