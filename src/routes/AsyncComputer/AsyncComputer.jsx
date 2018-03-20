@@ -64,7 +64,7 @@ export class RawAsyncCounter extends React.Component {
                         />
                     </label>
                 </p>
-                <button style={{width: '10rem'}} disabled={computing} onClick={this.handleResultClick}>
+                <button style={{ width: '10rem' }} disabled={computing} onClick={this.handleResultClick}>
                     Sum
                 </button>
                 {
