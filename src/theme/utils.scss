@@ -1,0 +1,78 @@
+@function isMap($var){
+  @return type-of($var) == 'map';
+}
+
+@function str-split($string, $separator) {
+  // empty array/list
+  $split-arr: ();
+  // first index of separator in string
+  $index : str-index($string, $separator);
+  // loop through string
+  @while $index != null {
+    // get the substring from the first character to the separator
+    $item: str-slice($string, 1, $index - 1);
+    // push item to array
+    $split-arr: append($split-arr, $item);
+    // remove item and separator from string
+    $string: str-slice($string, $index + 1);
+    // find new index of separator
+    $index : str-index($string, $separator);
+  }
+  // add the remaining string to list (the last item)
+  $split-arr: append($split-arr, $string);
+
+  @return $split-arr;
+}
+
+@function str-join($arr, $separator: '') {
+  $arr-length: length($arr);
+
+  @if ($arr-length == 0) {
+    @return '';
+  }
+
+  $str: '';
+  @for $index from 1 through $arr-length {
+    $str: str-insert($str, nth($arr, $index), str-length($str) + 1);
+    @if ($index < $arr-length) {
+      $str: str-insert($str, $separator, str-length($str) + 1);
+    }
+  }
+
+  @return $str;
+}
+
+@function remove-nth($list, $index) {
+  $result: null;
+
+  @if type-of($index) != number {
+    @warn "$index: #{quote($index)} is not a number for `remove-nth`.";
+  } @else if $index == 0 {
+    @warn "List index 0 must be a non-zero integer for `remove-nth`.";
+  } @else if abs($index) > length($list) {
+    @warn "List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.";
+  } @else {
+    $result: ();
+    $index: if($index < 0, length($list) + $index + 1, $index);
+
+    @for $i from 1 through length($list) {
+      @if $i != $index {
+        $result: append($result, nth($list, $i));
+      }
+    }
+  }
+
+  @return $result;
+}
+
+@function _getByPath($obj, $path) {
+  $first: nth($path, 1);
+  $value: map-get($obj, $first);
+  @if (length($path) == 1) {
+    @return $value;
+  }
+  @if (isMap($value) == false) {
+    @warn "can't find property at path #{quote(str-join($path, '.'))}";
+  }
+  @return _getByPath($value, remove-nth($path, 1));
+}

@@ -1,0 +1,29 @@
+@import './utils';
+
+/**
+ * Реализует механизм наследования тем
+ */
+@function extendTheme($parent, $extend) {
+  $target: $parent;
+
+  @each $name, $value in $extend {
+    @if isMap($value) {
+      $value: extendTheme(map-get($target, $name), $value);
+    }
+    $target: map-merge($target, ($name: $value));
+  }
+
+  @return $target;
+}
+
+/**
+ * Возвращает значение свойства по указанному пути, если значение равно null, то возвращает $fallback
+ */
+@function getProperty($obj, $property, $fallback: null) {
+  $path: str-split($property, '.');
+  $value: _getByPath($obj, $path);
+  @if $value == null {
+    @return $fallback;
+  }
+  @return $value;
+}

@@ -1,0 +1,10 @@
+@import '../core';
+@import '../theme-default/index';
+
+$theme-extended: extendTheme($theme-default, (
+    button: (
+        background-color: #fff,
+        border-color: #ededed,
+        color: #666,
+    )
+));

@@ -5,7 +5,7 @@ import { increment } from './SyncCounter.actions';
 
 export const RawSyncCounter = ({ counter, onIncrement }) => {
     return (
-        <div className="SyncCounter">
+        <div>
             <h1>Counter {process.env.VERSION}</h1>
             <p>Counter: <span style={{ color: '#f00' }}>{counter}</span></p>
             <button onClick={() => onIncrement()}>Increment</button>

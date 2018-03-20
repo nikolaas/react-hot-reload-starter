@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Button } from '../../components/Button';
 import { changeArgument, sum } from './AsyncComputer.actions';
 
 export class RawAsyncCounter extends React.Component {
@@ -36,7 +37,7 @@ export class RawAsyncCounter extends React.Component {
     render() {
         const { a, b, computing, error, result } = this.props;
         return (
-            <div className="AsyncCounter">
+            <div>
                 <h1>Async Computer {process.env.VERSION}</h1>
                 <p>
                     <label htmlFor="a">
@@ -64,9 +65,9 @@ export class RawAsyncCounter extends React.Component {
                         />
                     </label>
                 </p>
-                <button style={{ width: '10rem' }} disabled={computing} onClick={this.handleResultClick}>
+                <Button style={{ width: '10rem' }} disabled={computing} onClick={this.handleResultClick}>
                     Sum
-                </button>
+                </Button>
                 {
                     computing &&
                     <p>Computing...</p>

@@ -1,0 +1,115 @@
+@import './button-outline';
+
+$theme-default-button: (
+    background-color: transparent,
+    border-color: transparent,
+    color: #000,
+
+    hover: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+    ),
+
+    primary: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    secondary: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    success: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    danger: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    warning: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    info: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    light: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    dark: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+    link: (
+        background-color: transparent,
+        border-color: transparent,
+        color: #000,
+
+        hover: (
+            background-color: transparent,
+            border-color: transparent,
+            color: #000,
+        ),
+    ),
+
+    outline: $theme-default-button-outline
+)
