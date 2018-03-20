@@ -15,8 +15,8 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 /** Версия приложения */
 const VERSION = getVersion();
 
-const jsOutputFilename = enableInProd(`js/[name].js?hash=${VERSION}`, '[name].js?hash=[hash]');
-const cssOutputFilename = enableInProd(`css/[name].css?hash=${VERSION}`, '[name].js?hash=[contenthash]');
+const jsOutputFilename = enableInProd(`js/[name].js?hash=${VERSION}`, 'js/[name].js?hash=[hash]');
+const cssOutputFilename = enableInProd(`css/[name].css?hash=${VERSION}`, 'css/[name].js?hash=[contenthash]');
 
 const vendorsCssExtractor = new ExtractTextPlugin(cssOutputFilename);
 const appCssExtractor = new ExtractTextPlugin(cssOutputFilename);
@@ -32,11 +32,11 @@ const globalConstants = {
 module.exports = {
     mode: NODE_ENV,
     entry: {
-        vendors: [
-            'react',
-            'react-dom',
-            'react-hot-loader',
-        ],
+        // vendors: [
+        //     'react',
+        //     'react-dom',
+        //     'react-hot-loader',
+        // ],
         app: [
             './src/index.js'
         ],
@@ -57,7 +57,7 @@ module.exports = {
                 loader: {
                     loader: 'eslint-loader',
                     options: {
-                        emitWarning: NODE_ENV === 'development',
+                        emitWarning: NODE_ENV !== 'production',
                         emitError: NODE_ENV === 'production',
                         failOnWarning: NODE_ENV === 'production',
                         failOnError: NODE_ENV === 'production',
