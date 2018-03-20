@@ -4,7 +4,7 @@ import storeFactory from './store-factory';
 let store;
 
 export const registerAsyncReducer = (name, reducer) => {
-    injectReducer(name, reducer.default);
+    injectReducer(name, reducer);
     store.replaceReducer(createReducer());
 };
 

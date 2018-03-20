@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { increment } from './SyncCounter.actions';
 
-export const SyncCounter = ({ counter, onIncrement }) => {
+export const RawSyncCounter = ({ counter, onIncrement }) => {
     return (
         <div className="SyncCounter">
             <h1>Counter {process.env.VERSION}</h1>
@@ -13,12 +13,12 @@ export const SyncCounter = ({ counter, onIncrement }) => {
     );
 };
 
-SyncCounter.propTypes = {
+RawSyncCounter.propTypes = {
     counter: PropTypes.number,
     onIncrement: PropTypes.func.isRequired,
 };
 
-SyncCounter.defaultProps = {
+RawSyncCounter.defaultProps = {
     counter: 0,
 };
 
@@ -31,4 +31,4 @@ const mapDispatchToProps = {
     onIncrement: increment,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SyncCounter);
+export default connect(mapStateToProps, mapDispatchToProps)(RawSyncCounter);

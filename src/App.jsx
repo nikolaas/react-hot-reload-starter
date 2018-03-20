@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-import SyncCounter from './routes/SyncCounter';
+import { asyncComponent } from './components/AsyncComponent';
+
+const SyncCounter = asyncComponent(() => import('./routes/SyncCounter'));
 
 export default () => {
     return (

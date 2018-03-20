@@ -1,7 +1,7 @@
-import { AsyncRoute } from '../../components/AsyncRoute';
+import { registerAsyncReducer } from '../../store';
+import SyncCounter from './SyncCounter';
+import reducer from './SyncCounter.reducer';
 
-export default AsyncRoute({
-    name: 'syncCounter',
-    component: () => import('./SyncCounter'),
-    reducer: () => import('./SyncCounter.reducer'),
-});
+registerAsyncReducer('syncCounter', reducer);
+
+export default SyncCounter;
