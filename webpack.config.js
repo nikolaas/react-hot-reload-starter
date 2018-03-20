@@ -32,12 +32,8 @@ const globalConstants = {
 module.exports = {
     mode: NODE_ENV,
     entry: {
-        // vendors: [
-        //     'react',
-        //     'react-dom',
-        //     'react-hot-loader',
-        // ],
         app: [
+            'babel-polyfill',
             './src/index.js'
         ],
     },
