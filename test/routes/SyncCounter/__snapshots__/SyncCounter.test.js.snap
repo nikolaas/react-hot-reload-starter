@@ -1,28 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sync counter tests should render the sync counter 1`] = `
-<div
-  className="SyncCounter"
->
-  <h1>
-    Counter 
-  </h1>
-  <p>
-    Counter: 
-    <span
-      style={
-        Object {
-          "color": "#f00",
-        }
-      }
-    >
-      0
-    </span>
-  </p>
-  <button
-    onClick={[Function]}
-  >
-    Increment
-  </button>
-</div>
-`;
+exports[`Sync counter tests should render default value when value is not specified 1`] = `"Counter: 0"`;
+
+exports[`Sync counter tests should render specified value when value is specified 1`] = `"Counter: 10"`;

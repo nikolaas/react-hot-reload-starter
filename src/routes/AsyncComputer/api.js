@@ -1,4 +1,4 @@
-export const api = {
+export default {
     sum: async (a, b) => {
         /* eslint-disable no-console, no-unused-vars */
         console.log(`Sum request ${a} + ${b}`);

@@ -1,3 +1,5 @@
+import { CHANGE_ARGUMENT, COMPUTING_STARTED, COMPUTING_SUCCESS, COMPUTING_ERROR } from './AsyncComputer.actions'
+
 const initialState = {
     a: null,
     b: null,
@@ -8,16 +10,16 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
-        case 'change_argument': {
+        case CHANGE_ARGUMENT: {
             return { ...state, [action.payload.name]: action.payload.value };
         }
-        case 'summing': {
+        case COMPUTING_STARTED: {
             return { ...state, computing: true, result: null, error: null };
         }
-        case 'summing_success': {
+        case COMPUTING_SUCCESS: {
             return { ...state, computing: false, result: action.payload, error: null };
         }
-        case 'summing_error': {
+        case COMPUTING_ERROR: {
             return { ...state, computing: false, result: null, error: String(action.payload) };
         }
         default: {

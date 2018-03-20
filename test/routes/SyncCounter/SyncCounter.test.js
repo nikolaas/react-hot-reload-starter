@@ -3,12 +3,18 @@ import { shallow } from 'enzyme';
 import { RawSyncCounter } from '../../../src/routes/SyncCounter/SyncCounter';
 
 describe('Sync counter tests', () => {
-    it('should render the sync counter', () => {
-        const wrapper = shallow(<RawSyncCounter onIncrement={() => {}}/>);
-        expect(wrapper).toMatchSnapshot();
+    it('should render default value when value is not specified', () => {
+        const component = shallow(<RawSyncCounter onIncrement={jest.fn()}/>);
+        expect(component.find('.SyncCounter__value').text()).toMatchSnapshot();
+
     });
 
-    it('should trigger onIncrementEvent by click on increment button', () => {
+    it('should render specified value when value is specified', () => {
+        const component = shallow(<RawSyncCounter onIncrement={jest.fn()} counter={10}/>);
+        expect(component.find('.SyncCounter__value').text()).toMatchSnapshot();
+    });
+
+    it('should trigger onIncrementEvent when increment button was clicked', () => {
         const incrementSpy = jest.fn();
         const wrapper = shallow(<RawSyncCounter onIncrement={incrementSpy}/>);
         wrapper.find('button').simulate('click');

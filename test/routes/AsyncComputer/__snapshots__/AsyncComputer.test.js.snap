@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sync counter tests should render "computing..." message when computing in progress 1`] = `"Computing..."`;
+
+exports[`Sync counter tests should render arguments values in inputs when arguments is specified 1`] = `1`;
+
+exports[`Sync counter tests should render arguments values in inputs when arguments is specified 2`] = `2`;
+
+exports[`Sync counter tests should render error of computing when computing finished with error 1`] = `"Error: error"`;
+
+exports[`Sync counter tests should render result of computing when computing finished successfully 1`] = `"Sum: 3"`;

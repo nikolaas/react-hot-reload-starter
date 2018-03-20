@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
 import { changeArgument, sum } from './AsyncComputer.actions';
 
-export class RawAsyncCounter extends React.Component {
+export class RawAsyncComputer extends React.Component {
 
     static propTypes = {
         a: PropTypes.number,
@@ -70,15 +70,15 @@ export class RawAsyncCounter extends React.Component {
                 </Button>
                 {
                     computing &&
-                    <p>Computing...</p>
+                    <p className="AsyncComputer__result">Computing...</p>
                 }
                 {
                     !computing && error &&
-                    <p>Error: <span style={{ color: '#f00' }}>{String(error)}</span></p>
+                    <p className="AsyncComputer__result">Error: <span style={{ color: '#f00' }}>{error}</span></p>
                 }
                 {
                     !computing && result != null &&
-                    <p>Sum: <span style={{ color: '#f00' }}>{result}</span></p>
+                    <p className="AsyncComputer__result">Sum: <span style={{ color: '#f00' }}>{result}</span></p>
                 }
             </div>
         );
@@ -97,4 +97,4 @@ const mapDispatchToProps = {
     onSum: sum,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RawAsyncCounter);
+export default connect(mapStateToProps, mapDispatchToProps)(RawAsyncComputer);
