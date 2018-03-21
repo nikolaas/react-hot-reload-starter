@@ -1,0 +1,102 @@
+@keyframes pulse {
+    0% { transform: scale(1) rotate(0deg); }
+    16.665% { transform: scale(1.2) rotate(calc(var(--animation-speed) * 180deg)); }
+    33.33% { transform: scale(1) rotate(calc(var(--animation-speed) * 360deg)); }
+    100% { transform: scale(1) rotate(calc(var(--animation-speed) * 360deg)); }
+}
+
+@keyframes change-fill {
+    0% { fill: var(--accent-text-color); }
+    16.665% { fill: var(--secondary-text-color); }
+    33.33% { fill: var(--accent-text-color); }
+    100% { fill: var(--accent-text-color); }
+}
+
+.Main {
+    --default-background-color: #fff;
+    --default-text-color: #ae1903;
+
+    --accent-background-color: #ae1903;
+    --accent-text-color: #fff;
+
+    --secondary-text-color: #ff7e5a;
+    --animation-speed: 1;
+
+    height: 1px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Main__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 0;
+    background: var(--accent-background-color);
+    color: var(--accent-text-color);
+    font-size: 2em;
+}
+
+.Main__logo {
+    width: 5em;
+
+    animation-name: pulse;
+    animation-timing-function: linear;
+    animation-delay: 10s;
+    animation-duration: 13s;
+    animation-iteration-count: infinite;
+
+    g {
+        fill: #fff;
+        animation-name: change-fill;
+        animation-timing-function: linear;
+        animation-delay: 10s;
+        animation-duration: 13s;
+        animation-iteration-count: infinite;
+    }
+}
+
+.Main__title {
+    margin: .5em 0 0 0;
+}
+
+.Main__content {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Main__get-started {
+    background-color: var(--default-background-color);
+    border: 1px solid var(--accent-background-color);
+    color: var(--default-text-color);
+    border-radius: 4px;
+    outline: none;
+    transition: background-color .2s ease-in, border-color .2s ease-in, color .2s ease-in;
+    padding: .5em 1em;
+    cursor: pointer;
+    font-size: 1.5em;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        color: var(--default-text-color);
+    }
+
+    &:hover {
+        background-color: var(--accent-background-color);
+        border-color: var(--default-background-color);
+        color: var(--accent-text-color);
+
+        &:visited,
+        &:active {
+            text-decoration: none;
+            color: var(--accent-text-color);
+        }
+    }
+
+}
