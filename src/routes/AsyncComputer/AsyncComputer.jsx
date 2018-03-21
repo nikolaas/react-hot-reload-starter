@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
 import { changeArgument, sum } from './AsyncComputer.actions';
+import './AsyncComputer.scss';
 
 export class RawAsyncComputer extends React.Component {
 
@@ -37,8 +38,11 @@ export class RawAsyncComputer extends React.Component {
     render() {
         const { a, b, computing, error, result } = this.props;
         return (
-            <div>
-                <h1>Async Computer {process.env.VERSION}</h1>
+            <div className="AsyncComputer">
+                <h1 className="AsyncComputer__header">
+                    <i className="AsyncComputer__icon"/>
+                    Async Computer {process.env.VERSION}
+                </h1>
                 <p>
                     <label htmlFor="a">
                         {'a = '}

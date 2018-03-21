@@ -2,10 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
 const { enableInProd, enablePluginInProd } = require('./helpers/switchers');
-const { extractProdCss, extractDevCss } = require('./helpers/exctact-css');
 const getVersion = require('./helpers/get-version');
 
 /** Контекстный путь, на котором развернуто приложение. Должен указываться без завершающего слэша! */
@@ -15,13 +14,9 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 /** Версия приложения */
 const VERSION = getVersion();
 
-const jsOutputFilename = enableInProd(`js/[name].js?hash=${VERSION}`, 'js/[name].js?hash=[hash]');
-const cssOutputFilename = enableInProd(`css/[name].css?hash=${VERSION}`, 'css/[name].js?hash=[contenthash]');
-
-const vendorsCssExtractor = new ExtractTextPlugin(cssOutputFilename);
-const appCssExtractor = new ExtractTextPlugin(cssOutputFilename);
-const extractVendorCss = enableInProd(extractProdCss(vendorsCssExtractor), extractDevCss);
-const extractAppCss = enableInProd(extractProdCss(appCssExtractor), extractDevCss);
+const jsOutput = enableInProd(`js/[name].js?v=${VERSION}`, 'js/[name].js?hash=[hash]');
+const cssOutput = enableInProd(`css/[name].css?v=${VERSION}`, 'css/[name].js?hash=[chunkhash]');
+const cssChunkOutput = enableInProd(`css/[id].css?v=${VERSION}`, 'css/[id].js?hash=[chunkhash]');
 
 const globalConstants = {
     'process.env.NODE_ENV': `"${NODE_ENV}"`,
@@ -38,7 +33,7 @@ module.exports = {
         ],
     },
     output: {
-        filename: jsOutputFilename,
+        filename: jsOutput,
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
@@ -73,22 +68,21 @@ module.exports = {
             {
                 test: /\.css/,
                 include: /node_modules/,
-                use: extractVendorCss([
+                use: [
+                    enableInProd(MiniCssExtractPlugin.loader, { loader: 'style-loader', options: { hmr: false, } }),
                     {
-                        loader: 'style-loader',
+                        loader: 'css-loader',
                         options: {
-                            sourceMap: false,
-                            hmr: false,
+                            sourceMap: true
                         }
                     },
-                    { loader: 'css-loader', options: { sourceMap: true } },
-                ])
+                ]
             },
             {
                 test: /\.scss/,
                 include: path.join(__dirname, 'src'),
-                use: extractAppCss([
-                    { loader: 'style-loader', options: { sourceMap: true } },
+                use: [
+                    enableInProd(MiniCssExtractPlugin.loader, { loader: 'style-loader', options: { sourceMap: true } }),
                     {
                         loader: 'css-loader',
                         options: {
@@ -106,8 +100,8 @@ module.exports = {
                         }
                     },
                     { loader: 'sass-loader', options: { sourceMap: true } }
-                ])
-            }
+                ]
+            },
         ]
     },
     optimization: {
@@ -124,8 +118,7 @@ module.exports = {
             favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
             baseUrl: `${APP_BASE_URL}/`
         }),
-        ...enablePluginInProd(vendorsCssExtractor),
-        ...enablePluginInProd(appCssExtractor),
+        ...enablePluginInProd(new MiniCssExtractPlugin({ filename: cssOutput, chunkFilename: cssChunkOutput })),
     ],
     devtool: enableInProd('source-map', 'cheap-module-eval-source-map'),
     devServer: {
