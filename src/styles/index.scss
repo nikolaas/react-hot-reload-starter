@@ -1,0 +1,12 @@
+@import '~normalize.css';
+@import '../theme/index';
+@import './grid';
+
+html, body, #root {
+    height: 1px;
+    min-height: 100%;
+}
+
+body {
+    font-size: themed('font.size');
+}

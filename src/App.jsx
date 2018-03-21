@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import { asyncComponent } from './components/AsyncComponent';
 import NotFound from './routes/NotFound';
-import './styles.scss';
+import './styles/index.scss';
 
 const SyncCounter = asyncComponent(() => import('./routes/SyncCounter'));
 const AsyncComputer = asyncComponent(() => import('./routes/AsyncComputer'));
