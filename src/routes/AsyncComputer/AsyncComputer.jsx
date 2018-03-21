@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
 import { changeArgument, sum } from './AsyncComputer.actions';
-import CalculateIcon from '../../assets/images-dynamic/calculate.svg';
+import CalculateIcon from '../../assets/images/calculate.dynamic.svg';
 import './AsyncComputer.scss';
 
 export class RawAsyncComputer extends React.Component {

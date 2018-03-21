@@ -106,23 +106,18 @@ module.exports = {
             {
                 test: /\.(jpeg|jpg|png|gif|svg)/,
                 include: path.join(__dirname, 'src'),
-                exclude: path.join(__dirname, 'src', 'assets', 'images-dynamic'),
+                exclude: /\.dynamic\.svg/,
                 use: {
                     loader: 'file-loader',
-                    options: {
-                        jsx: true
-                    }
-                }
-            },
-            {
-                test: /\.svg/,
-                include: path.join(__dirname, 'src', 'assets', 'images-dynamic'),
-                use: {
-                    loader: 'react-svg-loader',
                     options: {
                         name: imageOutput,
                     }
                 }
+            },
+            {
+                test: /\.dynamic\.svg/,
+                include: path.join(__dirname, 'src'),
+                use: 'react-svg-loader'
             }
         ]
     },
