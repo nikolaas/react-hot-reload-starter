@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
 import { changeArgument, sum } from './AsyncComputer.actions';
+import CalculateIcon from '../../assets/images-dynamic/calculate.svg';
 import './AsyncComputer.scss';
 
 export class RawAsyncComputer extends React.Component {
@@ -69,8 +70,8 @@ export class RawAsyncComputer extends React.Component {
                         />
                     </label>
                 </p>
-                <Button style={{ width: '10rem' }} disabled={computing} onClick={this.handleResultClick}>
-                    Sum
+                <Button className="AsyncComputer__calculate" disabled={computing} onClick={this.handleResultClick}>
+                    <CalculateIcon className="AsyncComputer__calculate-icon"/> Sum
                 </Button>
                 {
                     computing &&

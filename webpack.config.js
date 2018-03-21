@@ -17,6 +17,7 @@ const VERSION = getVersion();
 const jsOutput = enableInProd(`js/[name].js?v=${VERSION}`, 'js/[name].js?hash=[hash]');
 const cssOutput = enableInProd(`css/[name].css?v=${VERSION}`, 'css/[name].js?hash=[chunkhash]');
 const cssChunkOutput = enableInProd(`css/[id].css?v=${VERSION}`, 'css/[id].js?hash=[chunkhash]');
+const imageOutput = enableInProd(`img/[name].[ext]?v=${VERSION}`, 'img/[name].[ext]?hash=[hash]');
 
 const globalConstants = {
     'process.env.NODE_ENV': `"${NODE_ENV}"`,
@@ -102,6 +103,27 @@ module.exports = {
                     { loader: 'sass-loader', options: { sourceMap: true } }
                 ]
             },
+            {
+                test: /\.(jpeg|jpg|png|gif|svg)/,
+                include: path.join(__dirname, 'src'),
+                exclude: path.join(__dirname, 'src', 'assets', 'images-dynamic'),
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        jsx: true
+                    }
+                }
+            },
+            {
+                test: /\.svg/,
+                include: path.join(__dirname, 'src', 'assets', 'images-dynamic'),
+                use: {
+                    loader: 'react-svg-loader',
+                    options: {
+                        name: imageOutput,
+                    }
+                }
+            }
         ]
     },
     optimization: {
