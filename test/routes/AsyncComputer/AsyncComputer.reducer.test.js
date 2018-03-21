@@ -1,9 +1,8 @@
-import React from 'react';
 import {
     changeArgument,
     startComputing,
     successComputing,
-    errorComputing
+    errorComputing,
 } from '../../../src/routes/AsyncComputer/AsyncComputer.actions';
 import reducer from '../../../src/routes/AsyncComputer/AsyncComputer.reducer';
 

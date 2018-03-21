@@ -6,7 +6,6 @@ describe('Sync counter tests', () => {
     it('should render default value when value is not specified', () => {
         const component = shallow(<RawSyncCounter onIncrement={jest.fn()}/>);
         expect(component.find('.SyncCounter__value').text()).toMatchSnapshot();
-
     });
 
     it('should render specified value when value is specified', () => {

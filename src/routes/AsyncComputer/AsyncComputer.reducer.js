@@ -1,4 +1,4 @@
-import { CHANGE_ARGUMENT, COMPUTING_STARTED, COMPUTING_SUCCESS, COMPUTING_ERROR } from './AsyncComputer.actions'
+import { CHANGE_ARGUMENT, COMPUTING_STARTED, COMPUTING_SUCCESS, COMPUTING_ERROR } from './AsyncComputer.actions';
 
 const initialState = {
     a: null,
