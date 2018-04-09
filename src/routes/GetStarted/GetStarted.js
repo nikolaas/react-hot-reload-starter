@@ -159,6 +159,7 @@ export default () => {
                     </Code>
                 </Chapter>
                 <Chapter title="Happy coding!"/>
+                <h4>P.S. Sorry for my English</h4>
             </Article>
         </BaseLayout>
     );
