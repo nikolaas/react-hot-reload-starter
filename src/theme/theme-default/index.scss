@@ -4,5 +4,15 @@ $theme-default: (
     font: (
         size: 16px,
     ),
+    color: (
+        background: (
+            default: #fff,
+            accent: #ae1903,
+        ),
+        text: (
+            default: #ae1903,
+            accent: #fff,
+        ),
+    ),
     button: $theme-default-button
 );
