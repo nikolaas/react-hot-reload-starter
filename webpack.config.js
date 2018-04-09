@@ -16,11 +16,6 @@ const VERSION = getVersion();
 /** Indicates whether to minify the code */
 const MINIMIZE = process.env.MIN === 'false' ? false : isProd();
 
-const jsOutput = inProdOrElse(`js/[name].js?v=${VERSION}`, 'js/[name].js?hash=[hash]');
-const cssOutput = inProdOrElse(`css/[name].css?v=${VERSION}`, 'css/[name].js?hash=[chunkhash]');
-const cssChunkOutput = inProdOrElse(`css/[id].css?v=${VERSION}`, 'css/[id].js?hash=[chunkhash]');
-const imageOutput = inProdOrElse(`img/[name].[ext]?v=${VERSION}`, 'img/[name].[ext]?hash=[hash]');
-
 const globalConstants = {
     'process.env.NODE_ENV': `"${NODE_ENV}"`,
     'process.env.VERSION': `"${VERSION}"`,
@@ -36,7 +31,7 @@ module.exports = {
         ],
     },
     output: {
-        filename: jsOutput,
+        filename: 'js/[name].js?hash=[hash]',
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
@@ -112,7 +107,7 @@ module.exports = {
                 use: {
                     loader: 'file-loader',
                     options: {
-                        name: imageOutput,
+                        name: 'img/[name].[ext]?hash=[hash]',
                     },
                 },
             },
@@ -138,7 +133,10 @@ module.exports = {
             favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
             baseUrl: `${APP_BASE_URL}/`,
         }),
-        ...enablePluginInProd(new MiniCssExtractPlugin({ filename: cssOutput, chunkFilename: cssChunkOutput })),
+        ...enablePluginInProd(new MiniCssExtractPlugin({
+            filename: 'css/[name].css?hash=[chunkhash]',
+            chunkFilename: 'css/[id].css?hash=[chunkhash]',
+        })),
     ],
     devtool: inProdOrElse('source-map', 'cheap-module-eval-source-map'),
     devServer: {
