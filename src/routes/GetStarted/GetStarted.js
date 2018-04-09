@@ -19,15 +19,15 @@ export default () => {
                     <h2 className="GetStarted__title">Getting Started</h2>
                     <p>
                         Starter shipped with next preinstalled libraries:
-                        <ul>
-                            <li><a href="https://reactjs.org/">React 16</a></li>
-                            <li>
-                                <a href="https://reacttraining.com/react-router/web/guides/philosophy">React Router 4</a>
-                            </li>
-                            <li><a href="https://redux.js.org/">Redux</a></li>
-                            <li><a href="https://github.com/gaearon/redux-thunk">Redux Thunk</a></li>
-                        </ul>
                     </p>
+                    <ul>
+                        <li><a href="https://reactjs.org/">React 16</a></li>
+                        <li>
+                            <a href="https://reacttraining.com/react-router/web/guides/philosophy">React Router 4</a>
+                        </li>
+                        <li><a href="https://redux.js.org/">Redux</a></li>
+                        <li><a href="https://github.com/gaearon/redux-thunk">Redux Thunk</a></li>
+                    </ul>
                     <p>
                         Starter supported hot reloading for JavaScript files and Sass files. For more information
                         about HMR see <a href="http://gaearon.github.io/react-hot-loader/">react-hot-loader</a> and{' '}
