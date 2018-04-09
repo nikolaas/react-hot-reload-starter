@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Nav } from '../../components/Nav';
-import { Section } from '../../components/Section';
+import { Article } from '../../components/Article';
 import { changeArgument, sum } from './AsyncComputer.actions';
 import CalculateIcon from '../../assets/images/calculate.dynamic.svg';
 import './AsyncComputer.scss';
@@ -48,7 +48,7 @@ export class RawAsyncComputer extends React.Component {
                     <Nav/>
                 </Header>
                 <main className="container">
-                    <Section title={title}>
+                    <Article title={title}>
                         <p>
                             <label htmlFor="a">
                                 {'a = '}
@@ -90,7 +90,7 @@ export class RawAsyncComputer extends React.Component {
                             !computing && result != null &&
                             <p className="AsyncComputer__result">Sum: <span style={{ color: '#f00' }}>{result}</span></p>
                         }
-                    </Section>
+                    </Article>
                 </main>
             </div>
         );
