@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo.dynamic.svg';
 import './Header.scss';
 
@@ -14,8 +15,12 @@ export const Header = ({ className, minimize, children }) => {
     );
     return (
         <header className={classes}>
-            <Logo className="Header__logo"/>
-            <h1 className="Header__title">React Hot Reload Starter</h1>
+            <Link className="Header__link" to="/">
+                <Logo className="Header__logo"/>
+            </Link>
+            <Link className="Header__link" to="/">
+                <h1 className="Header__title">React Hot Reload Starter</h1>
+            </Link>
             {children}
         </header>
     );

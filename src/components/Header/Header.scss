@@ -16,6 +16,19 @@ $secondaryTextColor: #ff7e5a;
     100% { fill: themed('color.text.accent'); }
 }
 
+.Header__link {
+    color: themed('color.text.accent');
+    text-decoration: none;
+
+    &:active,
+    &:focus,
+    &:visited,
+    &:hover {
+        color: themed('color.text.accent');
+        text-decoration: none;
+    }
+}
+
 .Header__logo {
     width: 5em;
     fill: themed('color.text.accent');
