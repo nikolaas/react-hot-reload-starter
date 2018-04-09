@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import importedComponent from 'react-imported-component';
 
-class LoadingRenderer extends React.Component {
+class DefaultLoadingRenderer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -32,7 +32,7 @@ class LoadingRenderer extends React.Component {
 
 }
 
-const ErrorRenderer = ({ error }) => {
+const DefaultErrorRenderer = ({ error }) => {
     return (
         <div>
             <p>Error occurred:</p>
@@ -41,24 +41,53 @@ const ErrorRenderer = ({ error }) => {
     );
 };
 
-ErrorRenderer.propTypes = {
+DefaultErrorRenderer.propTypes = {
     error: PropTypes.any,
 };
 
-ErrorRenderer.defaultProps = {
+DefaultErrorRenderer.defaultProps = {
     error: null,
 };
 
+const normalizeParams = params => {
+    if (params.component) {
+        return params;
+    }
+    return { component: params };
+};
+
+const createComponentFactory = ({ component, loadingComponent, errorComponent }) => {
+    return () => {
+        return importedComponent(component, {
+            LoadingComponent: loadingComponent || DefaultLoadingRenderer,
+            ErrorComponent: errorComponent || DefaultErrorRenderer,
+            onError: err => {
+                console.error('The error occurred when loading async component', err);
+            },
+        });
+    };
+};
+
+const createComponentProvider = componentFactory => {
+    let Component = null;
+    return () => {
+        if (Component == null) {
+            Component = componentFactory();
+        }
+        return Component;
+    };
+};
+
 export const asyncComponent = params => {
-    const component = params.component ? params.component : params;
-    const LoadingComponent = (params.component ? params.loading : null) || LoadingRenderer;
-    const ErrorComponent = (params.component ? params.error : null) || ErrorRenderer;
-    return importedComponent(component, {
-        LoadingComponent,
-        ErrorComponent,
-        onError: error => {
-            /* eslint-disable no-console */
-            console.log('The error occurred when loading async component', error);
-        },
-    });
+    const componentConfig = normalizeParams(params);
+    const componentFactory = createComponentFactory(componentConfig);
+    const componentProvider = createComponentProvider(componentFactory);
+
+    const AsyncComponent = props => {
+        const Component = componentProvider();
+        return <Component {...props}/>;
+    };
+    AsyncComponent.displayName = `async(${params.name || 'Component'})`;
+
+    return AsyncComponent;
 };
