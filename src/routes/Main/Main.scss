@@ -1,59 +1,10 @@
 @import '../../theme/index';
 
-$secondaryTextColor: #ff7e5a;
-
-@keyframes pulse {
-    0% { transform: scale(1) rotate(0deg); }
-    16.665% { transform: scale(1.2) rotate(180deg); }
-    33.33% { transform: scale(1) rotate(360deg); }
-    100% { transform: scale(1) rotate(360deg); }
-}
-
-@keyframes change-fill {
-    0% { fill: themed('color.text.accent'); }
-    16.665% { fill: $secondaryTextColor; }
-    33.33% { fill: themed('color.text.accent'); }
-    100% { fill: themed('color.text.accent'); }
-}
-
 .Main {
     height: 1px;
     min-height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.Main__header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2em 0;
-    background: themed('color.background.accent');
-    color: themed('color.text.accent');
-    font-size: 2em;
-}
-
-.Main__logo {
-    width: 5em;
-
-    animation-name: pulse;
-    animation-timing-function: linear;
-    animation-delay: 10s;
-    animation-duration: 13s;
-    animation-iteration-count: infinite;
-
-    g {
-        fill: #fff;
-        animation-name: change-fill;
-        animation-timing-function: linear;
-        animation-delay: 10s;
-        animation-duration: 13s;
-        animation-iteration-count: infinite;
-    }
-}
-
-.Main__title {
-    margin: .5em 0 0 0;
 }
 
 .Main__content {
