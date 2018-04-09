@@ -19,7 +19,10 @@ export const Header = ({ className, minimize, children }) => {
                 <Logo className="Header__logo"/>
             </Link>
             <Link className="Header__link" to="/">
-                <h1 className="Header__title">React Hot Reload Starter</h1>
+                <h1 className="Header__title">
+                    React Hot Reload Starter
+                    <span className="Header__version">v{process.env.VERSION}</span>
+                </h1>
             </Link>
             {children}
         </header>
