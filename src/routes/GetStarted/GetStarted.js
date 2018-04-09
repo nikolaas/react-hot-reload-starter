@@ -86,6 +86,11 @@ export default () => {
                             <Line>npm run build:fat</Line>
                         </Code>
                         <p>Command run building not minified bundle.</p>
+                        <p>To run the production build, execute the command:</p>
+                        <Code>
+                            <Line>npm start</Line>
+                        </Code>
+                        <p>Command starts a simple static server on port 9000 (by default).</p>
                     </Chapter>
                     <Chapter title="Linting">
                         <p>
