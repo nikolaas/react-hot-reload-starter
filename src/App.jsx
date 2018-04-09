@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
+import './styles/index.scss';
 import { asyncComponent } from './components/AsyncComponent';
 import Main from './routes/Main';
 import NotFound from './routes/NotFound';
-import './styles/index.scss';
 
 const GetStarted = asyncComponent(() => import('./routes/GetStarted'));
 const SyncCounter = asyncComponent(() => import('./routes/SyncCounter'));
