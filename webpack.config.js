@@ -2,24 +2,24 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
-const { isProd, enableInProd, enablePluginInProd } = require('./helpers/switchers');
+const { isProd, inProdOrElse, enablePluginInProd } = require('./helpers/switchers');
 const getVersion = require('./helpers/get-version');
 
-/** Контекстный путь, на котором развернуто приложение. Должен указываться без завершающего слэша! */
+/** Context path on which the application is deployed. Must be specified without trailing slash! */
 const APP_BASE_URL = process.env.APP_BASE_URL || '';
-/** Тип сборки: production или development */
+/** Build type: production or development */
 const NODE_ENV = process.env.NODE_ENV || 'development';
-/** Версия приложения */
+/** Application version */
 const VERSION = getVersion();
 /** Indicates whether to minify the code */
 const MINIMIZE = process.env.MIN === 'false' ? false : isProd();
 
-const jsOutput = enableInProd(`js/[name].js?v=${VERSION}`, 'js/[name].js?hash=[hash]');
-const cssOutput = enableInProd(`css/[name].css?v=${VERSION}`, 'css/[name].js?hash=[chunkhash]');
-const cssChunkOutput = enableInProd(`css/[id].css?v=${VERSION}`, 'css/[id].js?hash=[chunkhash]');
-const imageOutput = enableInProd(`img/[name].[ext]?v=${VERSION}`, 'img/[name].[ext]?hash=[hash]');
+const jsOutput = inProdOrElse(`js/[name].js?v=${VERSION}`, 'js/[name].js?hash=[hash]');
+const cssOutput = inProdOrElse(`css/[name].css?v=${VERSION}`, 'css/[name].js?hash=[chunkhash]');
+const cssChunkOutput = inProdOrElse(`css/[id].css?v=${VERSION}`, 'css/[id].js?hash=[chunkhash]');
+const imageOutput = inProdOrElse(`img/[name].[ext]?v=${VERSION}`, 'img/[name].[ext]?hash=[hash]');
 
 const globalConstants = {
     'process.env.NODE_ENV': `"${NODE_ENV}"`,
@@ -32,7 +32,7 @@ module.exports = {
     entry: {
         app: [
             'babel-polyfill',
-            './src/index.js'
+            './src/index.js',
         ],
     },
     output: {
@@ -40,12 +40,12 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.json']
+        extensions: ['.js', '.jsx', '.json'],
     },
     module: {
         rules: [
             {
-                enforce: "pre",
+                enforce: 'pre',
                 test: /\.jsx?$/,
                 include: path.join(__dirname, 'src'),
                 loader: {
@@ -56,7 +56,7 @@ module.exports = {
                         failOnWarning: NODE_ENV === 'production',
                         failOnError: NODE_ENV === 'production',
                     },
-                }
+                },
             },
             {
                 test: /\.jsx?$/,
@@ -66,32 +66,32 @@ module.exports = {
                     options: {
                         cacheDirectory: true,
                     },
-                }
+                },
             },
             {
                 test: /\.css/,
                 include: /node_modules/,
                 use: [
-                    enableInProd(MiniCssExtractPlugin.loader, { loader: 'style-loader', options: { hmr: false, } }),
+                    inProdOrElse(MiniCssExtractPlugin.loader, { loader: 'style-loader', options: { hmr: false } }),
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true
-                        }
+                            sourceMap: true,
+                        },
                     },
-                ]
+                ],
             },
             {
                 test: /\.scss/,
                 include: path.join(__dirname, 'src'),
                 use: [
-                    enableInProd(MiniCssExtractPlugin.loader, { loader: 'style-loader', options: { sourceMap: true } }),
+                    inProdOrElse(MiniCssExtractPlugin.loader, { loader: 'style-loader', options: { sourceMap: true } }),
                     {
                         loader: 'css-loader',
                         options: {
                             sourceMap: true,
                             minimize: MINIMIZE,
-                        }
+                        },
                     },
                     {
                         loader: 'postcss-loader',
@@ -99,11 +99,11 @@ module.exports = {
                             sourceMap: true,
                             plugins: [
                                 autoprefixer,
-                            ]
-                        }
+                            ],
+                        },
                     },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
-                ]
+                    { loader: 'sass-loader', options: { sourceMap: true } },
+                ],
             },
             {
                 test: /\.(jpeg|jpg|png|gif|svg)/,
@@ -113,20 +113,20 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: imageOutput,
-                    }
-                }
+                    },
+                },
             },
             {
                 test: /\.dynamic\.svg/,
                 include: path.join(__dirname, 'src'),
-                use: 'react-svg-loader'
-            }
-        ]
+                use: 'react-svg-loader',
+            },
+        ],
     },
     optimization: {
         minimize: MINIMIZE,
         splitChunks: {
-            chunks: "all",
+            chunks: 'all',
         },
     },
     plugins: [
@@ -136,15 +136,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html'),
             favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
-            baseUrl: `${APP_BASE_URL}/`
+            baseUrl: `${APP_BASE_URL}/`,
         }),
         ...enablePluginInProd(new MiniCssExtractPlugin({ filename: cssOutput, chunkFilename: cssChunkOutput })),
     ],
-    devtool: enableInProd('source-map', 'cheap-module-eval-source-map'),
+    devtool: inProdOrElse('source-map', 'cheap-module-eval-source-map'),
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000,
         historyApiFallback: true,
-    }
+    },
 };
