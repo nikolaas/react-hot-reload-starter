@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import './Button.scss';
+
+const classNames = (...args) => args.filter(Boolean).join(' ');
 
 export const Button = ({ className, ...props }) => {
     return (
