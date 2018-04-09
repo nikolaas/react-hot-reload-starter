@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from '../../components/Header';
 import { Nav } from '../../components/Nav';
+import { Section } from '../../components/Section';
 import './GetStarted.scss';
 
 export default () => {
@@ -10,8 +11,7 @@ export default () => {
                 <Nav/>
             </Header>
             <main className="container GetStarted__content">
-                <section>
-                    <h2 className="GetStarted__title">Getting Started</h2>
+                <Section title="Getting Started">
                     <p>
                         Starter shipped with next preinstalled libraries:
                     </p>
@@ -124,7 +124,7 @@ export default () => {
                         </span>
                     </code>
                     <h3 className="GetStarted__caption">Happy coding!</h3>
-                </section>
+                </Section>
             </main>
         </div>
     );

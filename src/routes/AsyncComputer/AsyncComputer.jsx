@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Nav } from '../../components/Nav';
+import { Section } from '../../components/Section';
 import { changeArgument, sum } from './AsyncComputer.actions';
 import CalculateIcon from '../../assets/images/calculate.dynamic.svg';
 import './AsyncComputer.scss';
@@ -40,58 +41,57 @@ export class RawAsyncComputer extends React.Component {
 
     render() {
         const { a, b, computing, error, result } = this.props;
+        const title = <span className="AsyncComputer__title"><i className="AsyncComputer__icon"/>Async Computer</span>;
         return (
             <div className="AsyncComputer">
                 <Header minimize>
                     <Nav/>
                 </Header>
-                <div className="container">
-                    <h2 className="AsyncComputer__header">
-                        <i className="AsyncComputer__icon"/>
-                        Async Computer {process.env.VERSION}
-                    </h2>
-                    <p>
-                        <label htmlFor="a">
-                            {'a = '}
-                            <input
-                                type="text"
-                                id="a"
-                                name="a"
-                                value={a == null ? '' : a}
-                                disabled={computing}
-                                onChange={this.handleInputChange}
-                            />
-                        </label>
-                    </p>
-                    <p>
-                        <label htmlFor="b">
-                            {'b = '}
-                            <input
-                                type="text"
-                                id="b"
-                                name="b"
-                                value={b == null ? '' : b}
-                                disabled={computing}
-                                onChange={this.handleInputChange}
-                            />
-                        </label>
-                    </p>
-                    <Button className="AsyncComputer__calculate" disabled={computing} onClick={this.handleResultClick}>
-                        <CalculateIcon className="AsyncComputer__calculate-icon"/> Sum
-                    </Button>
-                    {
-                        computing &&
-                        <p className="AsyncComputer__result">Computing...</p>
-                    }
-                    {
-                        !computing && error &&
-                        <p className="AsyncComputer__result">Error: <span style={{ color: '#f00' }}>{error}</span></p>
-                    }
-                    {
-                        !computing && result != null &&
-                        <p className="AsyncComputer__result">Sum: <span style={{ color: '#f00' }}>{result}</span></p>
-                    }
-                </div>
+                <main className="container">
+                    <Section title={title}>
+                        <p>
+                            <label htmlFor="a">
+                                {'a = '}
+                                <input
+                                    type="text"
+                                    id="a"
+                                    name="a"
+                                    value={a == null ? '' : a}
+                                    disabled={computing}
+                                    onChange={this.handleInputChange}
+                                />
+                            </label>
+                        </p>
+                        <p>
+                            <label htmlFor="b">
+                                {'b = '}
+                                <input
+                                    type="text"
+                                    id="b"
+                                    name="b"
+                                    value={b == null ? '' : b}
+                                    disabled={computing}
+                                    onChange={this.handleInputChange}
+                                />
+                            </label>
+                        </p>
+                        <Button className="AsyncComputer__calculate" disabled={computing} onClick={this.handleResultClick}>
+                            <CalculateIcon className="AsyncComputer__calculate-icon"/> Sum
+                        </Button>
+                        {
+                            computing &&
+                            <p className="AsyncComputer__result">Computing...</p>
+                        }
+                        {
+                            !computing && error &&
+                            <p className="AsyncComputer__result">Error: <span style={{ color: '#f00' }}>{error}</span></p>
+                        }
+                        {
+                            !computing && result != null &&
+                            <p className="AsyncComputer__result">Sum: <span style={{ color: '#f00' }}>{result}</span></p>
+                        }
+                    </Section>
+                </main>
             </div>
         );
     }
