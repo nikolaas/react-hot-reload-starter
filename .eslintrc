@@ -6,121 +6,140 @@
         "node": true,
         "jest": true
     },
-  "rules": {
-    "linebreak-style": "off",
-    "indent": [
-      "error",
-      4,
-      {
-        "SwitchCase": 1,
-        "VariableDeclarator": 1,
-        "outerIIFEBody": 1,
-        // MemberExpression: null,
-        "FunctionDeclaration": {
-          "parameters": 1,
-          "body": 1
-        },
-        "FunctionExpression": {
-          "parameters": 1,
-          "body": 1
-        },
-        "CallExpression": {
-          "arguments": 1
-        },
-        "ArrayExpression": 1,
-        "ObjectExpression": 1,
-        "ImportDeclaration": 1,
-        "flatTernaryExpressions": false,
-        "ignoredNodes": [
-          "JSX"
-        ]
-      }
-    ],
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ],
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
-    "dot-notation": "off",
-    "max-len": [
-      "error",
-      120,
-      2,
-      {
-        "ignoreUrls": true,
-        "ignoreComments": false,
-        "ignoreRegExpLiterals": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true
-      }
-    ],
-    "padded-blocks": [
-      "error",
-      {
-        "blocks": "never",
-        "classes": "always",
-        "switches": "never"
-      }
-    ],
-    "no-param-reassign": "off",
-    "arrow-body-style": "off",
-    "spaced-comment": "off",
-    "default-case": "off",
-    "object-curly-newline": ["error", { "consistent": true }],
-    "class-methods-use-this": "off",
-    "import/prefer-default-export": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/label-has-for": "warn",
-    "jsx-a11y/no-noninteractive-element-interactions": "off",
-    "jsx-a11y/anchor-is-valid": [
-      "error",
-      {
-        "components": [ "Link" ],
-        "specialLink": [ "to" ],
-        "aspects": [ "noHref" ]
-      }
-    ],
-    "react/jsx-indent-props": [
-      "error",
-      4
-    ],
-    "react/jsx-indent": [
-      "error",
-      4
-    ],
-    "react/jsx-tag-spacing": [
-      "error",
-      {
-        "closingSlash": "never",
-        "beforeSelfClosing": "never",
-        "afterOpening": "never"
-      }
-    ],
-    "react/forbid-prop-types": "off",
-    "react/prop-types": [
-      "warn",
-      {
-        "ignore": [],
-        "customValidators": [],
-        "skipUndeclared": false
-      }
-    ],
-    "react/require-default-props": "warn",
-    "react/prefer-stateless-function": "off",
-    "import/no-webpack-loader-syntax": "off"
-  }
+    "rules": {
+        "linebreak-style": "off",
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1,
+                "VariableDeclarator": 1,
+                "outerIIFEBody": 1,
+                "FunctionDeclaration": {
+                    "parameters": 1,
+                    "body": 1
+                },
+                "FunctionExpression": {
+                    "parameters": 1,
+                    "body": 1
+                },
+                "CallExpression": {
+                    "arguments": 1
+                },
+                "ArrayExpression": 1,
+                "ObjectExpression": 1,
+                "ImportDeclaration": 1,
+                "flatTernaryExpressions": false,
+                "ignoredNodes": [
+                    "JSX"
+                ]
+            }
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "dot-notation": "off",
+        "max-len": [
+            "error",
+            120,
+            2,
+            {
+                "ignoreUrls": true,
+                "ignoreComments": false,
+                "ignoreRegExpLiterals": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
+        ],
+        "padded-blocks": [
+            "error",
+            {
+                "blocks": "never",
+                "classes": "always",
+                "switches": "never"
+            }
+        ],
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
+        "no-param-reassign": "off",
+        "arrow-body-style": "off",
+        "spaced-comment": "off",
+        "default-case": "off",
+        "object-curly-newline": [
+            "error",
+            {
+                "consistent": true
+            }
+        ],
+        "class-methods-use-this": "off",
+        "import/prefer-default-export": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/label-has-for": "warn",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/anchor-is-valid": [
+            "error",
+            {
+                "components": [
+                    "Link"
+                ],
+                "specialLink": [
+                    "to"
+                ],
+                "aspects": [
+                    "noHref"
+                ]
+            }
+        ],
+        "react/jsx-indent-props": [
+            "error",
+            4
+        ],
+        "react/jsx-indent": [
+            "error",
+            4
+        ],
+        "react/jsx-tag-spacing": [
+            "error",
+            {
+                "closingSlash": "never",
+                "beforeSelfClosing": "never",
+                "afterOpening": "never"
+            }
+        ],
+        "react/forbid-prop-types": "off",
+        "react/prop-types": [
+            "warn",
+            {
+                "ignore": [],
+                "customValidators": [],
+                "skipUndeclared": false
+            }
+        ],
+        "react/require-default-props": "warn",
+        "react/prefer-stateless-function": "off",
+        "import/no-webpack-loader-syntax": "off"
+    }
 }
