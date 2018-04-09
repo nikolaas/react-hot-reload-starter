@@ -10,6 +10,6 @@ function enablePluginInProd(plugin) {
     return enableInProd([plugin], []);
 }
 
+exports.isProd = isProd;
 exports.enableInProd = enableInProd;
-
 exports.enablePluginInProd = enablePluginInProd;

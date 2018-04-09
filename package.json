@@ -29,9 +29,10 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build:dev": "cross-env NODE_ENV=development webpack",
-    "build:only": "cross-env NODE_ENV=production webpack",
+    "build:fat": "cross-env NODE_ENV=production cross-env MIN=false webpack",
+    "build:min": "cross-env NODE_ENV=production webpack",
     "build:stats": "cross-env NODE_ENV=production webpack --progress --profile --json >stats.json",
-    "build": "npm run lint && npm run test && npm run build:only",
+    "build": "npm run lint && npm run test && npm run build:min",
     "test": "jest",
     "test:update": "jest -u",
     "test:coverage": "jest --coverage",

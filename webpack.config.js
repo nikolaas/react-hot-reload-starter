@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const autoprefixer = require('autoprefixer');
-const { enableInProd, enablePluginInProd } = require('./helpers/switchers');
+const { isProd, enableInProd, enablePluginInProd } = require('./helpers/switchers');
 const getVersion = require('./helpers/get-version');
 
 /** Контекстный путь, на котором развернуто приложение. Должен указываться без завершающего слэша! */
@@ -13,6 +13,8 @@ const APP_BASE_URL = process.env.APP_BASE_URL || '';
 const NODE_ENV = process.env.NODE_ENV || 'development';
 /** Версия приложения */
 const VERSION = getVersion();
+/** Indicates whether to minify the code */
+const MINIMIZE = process.env.MIN === 'false' ? false : isProd();
 
 const jsOutput = enableInProd(`js/[name].js?v=${VERSION}`, 'js/[name].js?hash=[hash]');
 const cssOutput = enableInProd(`css/[name].css?v=${VERSION}`, 'css/[name].js?hash=[chunkhash]');
@@ -88,7 +90,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             sourceMap: true,
-                            minimize: NODE_ENV === 'production',
+                            minimize: MINIMIZE,
                         }
                     },
                     {
@@ -122,6 +124,7 @@ module.exports = {
         ]
     },
     optimization: {
+        minimize: MINIMIZE,
         splitChunks: {
             chunks: "all",
         },
