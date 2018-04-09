@@ -25,5 +25,5 @@ app.use(express.static(root));
 app.use(historyApiFallback('index.html', { root }));
 
 app.listen(port, function () {
-    console.log(`Some-service app started on port ${port}`);
+    console.log(`Application started on port ${port}`);
 });
