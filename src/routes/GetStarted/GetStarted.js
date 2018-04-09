@@ -85,7 +85,10 @@ export default () => {
                     <Code>
                         <Line>npm start</Line>
                     </Code>
-                    <p>Command starts a simple static server on port 9000 (by default).</p>
+                    <p>
+                        Command starts a simple static server on address{' '}
+                        <a href="http://localhost:9000">http://localhost:9000</a>.
+                    </p>
                 </Chapter>
                 <Chapter title="Linting">
                     <p>
