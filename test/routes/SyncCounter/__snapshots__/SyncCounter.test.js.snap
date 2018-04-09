@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Sync counter tests should render default value when value is not specified 1`] = `"Counter: 0"`;
-
-exports[`Sync counter tests should render specified value when value is specified 1`] = `"Counter: 10"`;

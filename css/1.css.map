@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/components/Article/Article.scss"],"names":[],"mappings":"AAAA,gBACI,aACA,sBAAuB,C","file":"css/1.css?hash=0565f520986ea60cd740","sourcesContent":[".Article__title {\n    display: flex;\n    justify-content: center;\n}\n"],"sourceRoot":""}
