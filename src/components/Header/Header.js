@@ -6,8 +6,14 @@ import './Header.scss';
 const classNames = (...args) => args.filter(Boolean).join(' ');
 
 export const Header = ({ className, minimize, children }) => {
+    const classes = classNames(
+        'Header',
+        minimize && 'Header--minimize',
+        !minimize && 'Header--animated',
+        className,
+    );
     return (
-        <header className={classNames('Header', minimize && 'Header--minimize', className)}>
+        <header className={classes}>
             <Logo className="Header__logo"/>
             <h1 className="Header__title">React Hot Reload Starter</h1>
             {children}

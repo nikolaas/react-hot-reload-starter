@@ -16,6 +16,19 @@ $secondaryTextColor: #ff7e5a;
     100% { fill: themed('color.text.accent'); }
 }
 
+.Header__logo {
+    width: 5em;
+    fill: themed('color.text.accent');
+
+    g {
+        fill: themed('color.text.accent');
+    }
+}
+
+.Header__title {
+    margin: .5em 0 0 0;
+}
+
 .Header {
     display: flex;
     flex-direction: column;
@@ -24,28 +37,33 @@ $secondaryTextColor: #ff7e5a;
     background: themed('color.background.accent');
     color: themed('color.text.accent');
     font-size: 2em;
-}
 
-.Header__logo {
-    width: 5em;
+    &--minimize {
+        font-size: 1em;
+        flex-direction: row;
+        padding-right: 1em;
 
-    animation-name: pulse;
-    animation-timing-function: linear;
-    animation-delay: 10s;
-    animation-duration: 13s;
-    animation-iteration-count: infinite;
-    fill: themed('color.text.accent');
-
-    g {
-        fill: themed('color.text.accent');
-        animation-name: change-fill;
-        animation-timing-function: linear;
-        animation-delay: 10s;
-        animation-duration: 13s;
-        animation-iteration-count: infinite;
+        .Header__title {
+            margin: 0;
+        }
     }
-}
 
-.Header__title {
-    margin: .5em 0 0 0;
+    &--animated {
+        .Header__logo {
+            animation-name: pulse;
+            animation-timing-function: linear;
+            animation-delay: 10s;
+            animation-duration: 13s;
+            animation-iteration-count: infinite;
+
+            g {
+                animation-name: change-fill;
+                animation-timing-function: linear;
+                animation-delay: 10s;
+                animation-duration: 13s;
+                animation-iteration-count: infinite;
+            }
+        }
+
+    }
 }
