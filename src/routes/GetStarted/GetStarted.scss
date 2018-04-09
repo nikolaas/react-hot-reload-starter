@@ -1,19 +1,8 @@
-.GetStarted {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.GetStarted__content {
-    flex: 1 1 0;
-    margin-bottom: 3em;
-}
-
-.GetStarted__caption {
+.Chapter {
     text-align: left;
 }
 
-.GetStarted__code {
+.Code {
     display: block;
     padding: 16px;
     overflow: auto;
@@ -23,6 +12,6 @@
     border-radius: 3px;
 }
 
-.GetStarted__line {
+.Line {
     display: block;
 }

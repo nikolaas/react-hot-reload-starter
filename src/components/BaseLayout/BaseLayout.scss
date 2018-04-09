@@ -1,0 +1,10 @@
+.BaseLayout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.BaseLayout__content {
+    flex: 1 1 0;
+    margin-bottom: 3em;
+}
