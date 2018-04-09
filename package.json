@@ -33,6 +33,7 @@
     "build:min": "cross-env NODE_ENV=production webpack",
     "build:stats": "cross-env NODE_ENV=production webpack --progress --profile --json >stats.json",
     "build": "npm run lint && npm run test && npm run build:min",
+    "build:gh-pages": "npm run lint && npm run test && cross-env APP_BASE_URL=/react-hot-reload-starter npm run build:min",
     "start": "node server/index",
     "test": "jest",
     "test:update": "jest -u",
