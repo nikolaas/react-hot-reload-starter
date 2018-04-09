@@ -1,10 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import { asyncComponent } from './components/AsyncComponent';
+import Main from './routes/Main';
 import NotFound from './routes/NotFound';
 import './styles/index.scss';
 
-const Main = asyncComponent(() => import('./routes/Main'));
 const GetStarted = asyncComponent(() => import('./routes/GetStarted'));
 const SyncCounter = asyncComponent(() => import('./routes/SyncCounter'));
 const AsyncComputer = asyncComponent(() => import('./routes/AsyncComputer'));
