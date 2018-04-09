@@ -1,18 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Header } from '../../components/Header';
+import { Nav } from '../../components/Nav';
 import './GetStarted.scss';
 
 export default () => {
     return (
         <div className="GetStarted">
             <Header minimize>
-                <nav className="GetStarted__menu">
-                    <Link className="GetStarted__nav-link" to="/examples">Examples</Link>
-                    <a className="GetStarted__nav-link" href="https://github.com/nikolaas/react-hot-reload-starter">
-                        View on GitHub
-                    </a>
-                </nav>
+                <Nav/>
             </Header>
             <main className="container GetStarted__content">
                 <section>

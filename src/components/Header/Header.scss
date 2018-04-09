@@ -39,9 +39,9 @@ $secondaryTextColor: #ff7e5a;
     font-size: 2em;
 
     &--minimize {
+        padding: 0 1em;
         font-size: 1em;
         flex-direction: row;
-        padding-right: 1em;
 
         .Header__title {
             margin: 0;

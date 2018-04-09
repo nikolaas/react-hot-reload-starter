@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '../../components/Button';
+import { Header } from '../../components/Header';
+import { Nav } from '../../components/Nav';
 import { changeArgument, sum } from './AsyncComputer.actions';
 import CalculateIcon from '../../assets/images/calculate.dynamic.svg';
 import './AsyncComputer.scss';
@@ -40,51 +42,56 @@ export class RawAsyncComputer extends React.Component {
         const { a, b, computing, error, result } = this.props;
         return (
             <div className="AsyncComputer">
-                <h1 className="AsyncComputer__header">
-                    <i className="AsyncComputer__icon"/>
-                    Async Computer {process.env.VERSION}
-                </h1>
-                <p>
-                    <label htmlFor="a">
-                        {'a = '}
-                        <input
-                            type="text"
-                            id="a"
-                            name="a"
-                            value={a == null ? '' : a}
-                            disabled={computing}
-                            onChange={this.handleInputChange}
-                        />
-                    </label>
-                </p>
-                <p>
-                    <label htmlFor="b">
-                        {'b = '}
-                        <input
-                            type="text"
-                            id="b"
-                            name="b"
-                            value={b == null ? '' : b}
-                            disabled={computing}
-                            onChange={this.handleInputChange}
-                        />
-                    </label>
-                </p>
-                <Button className="AsyncComputer__calculate" disabled={computing} onClick={this.handleResultClick}>
-                    <CalculateIcon className="AsyncComputer__calculate-icon"/> Sum
-                </Button>
-                {
-                    computing &&
-                    <p className="AsyncComputer__result">Computing...</p>
-                }
-                {
-                    !computing && error &&
-                    <p className="AsyncComputer__result">Error: <span style={{ color: '#f00' }}>{error}</span></p>
-                }
-                {
-                    !computing && result != null &&
-                    <p className="AsyncComputer__result">Sum: <span style={{ color: '#f00' }}>{result}</span></p>
-                }
+                <Header minimize>
+                    <Nav/>
+                </Header>
+                <div className="container">
+                    <h2 className="AsyncComputer__header">
+                        <i className="AsyncComputer__icon"/>
+                        Async Computer {process.env.VERSION}
+                    </h2>
+                    <p>
+                        <label htmlFor="a">
+                            {'a = '}
+                            <input
+                                type="text"
+                                id="a"
+                                name="a"
+                                value={a == null ? '' : a}
+                                disabled={computing}
+                                onChange={this.handleInputChange}
+                            />
+                        </label>
+                    </p>
+                    <p>
+                        <label htmlFor="b">
+                            {'b = '}
+                            <input
+                                type="text"
+                                id="b"
+                                name="b"
+                                value={b == null ? '' : b}
+                                disabled={computing}
+                                onChange={this.handleInputChange}
+                            />
+                        </label>
+                    </p>
+                    <Button className="AsyncComputer__calculate" disabled={computing} onClick={this.handleResultClick}>
+                        <CalculateIcon className="AsyncComputer__calculate-icon"/> Sum
+                    </Button>
+                    {
+                        computing &&
+                        <p className="AsyncComputer__result">Computing...</p>
+                    }
+                    {
+                        !computing && error &&
+                        <p className="AsyncComputer__result">Error: <span style={{ color: '#f00' }}>{error}</span></p>
+                    }
+                    {
+                        !computing && result != null &&
+                        <p className="AsyncComputer__result">Sum: <span style={{ color: '#f00' }}>{result}</span></p>
+                    }
+                </div>
             </div>
         );
     }
