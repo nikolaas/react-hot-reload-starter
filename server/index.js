@@ -1,5 +1,6 @@
 var path = require('path');
 var express = require('express');
+var morgan = require('morgan');
 
 /**
  * Accepts the same arguments as the method http://expressjs.com/en/api.html#res.sendFile
@@ -21,7 +22,8 @@ var root = path.resolve(__dirname, '../dist');
 
 var app = express();
 
-app.use(express.static(root));
+app.use(morgan('combined'));
+app.use(express.static(root, { extensions: ['html'] }));
 app.use(historyApiFallback('index.html', { root }));
 
 app.listen(port, function () {
