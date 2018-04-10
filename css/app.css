@@ -5,4 +5,4 @@
 .Nav{flex:1;align-self:stretch;display:flex;justify-content:flex-end;align-items:stretch}.Nav__item{padding:1em;transition:background-color .2s ease-out;cursor:pointer}.Nav__item:hover{background-color:#951503}.Nav__menu{display:flex;flex-direction:column}.Nav__menu-item{padding:1em;transition:background-color .2s ease-out}.Nav__menu-item:hover{background-color:#951503}.Nav__link{display:flex;align-items:center;white-space:nowrap}.Nav__link,.Nav__link:active,.Nav__link:focus,.Nav__link:hover,.Nav__link:visited{color:#fff;text-decoration:none}
 .BaseLayout{min-height:100%;display:flex;flex-direction:column}.BaseLayout__content{flex:1 1 0;margin-bottom:3em}
 
-/*# sourceMappingURL=app.css.map?hash=5d859ceb6bb54e53f9f1*/
+/*# sourceMappingURL=app.css.map?hash=eef0d70a7b139aa6554c*/
