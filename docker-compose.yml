@@ -1,25 +1,13 @@
 version: "3"
 
 services:
-  ui:
+  react-hot-reload-starter:
     build: .
     restart: always
     stdin_open: true
     volumes:
-      - simconf-ui-static:/simconf-ui
-
-  nginx:
-    image: nstupak/nginx
-    restart: always
-    volumes:
       - ./nginx.tmpl:/etc/nginx/nginx.tmpl
-      - simconf-ui-static:/etc/nginx/html
     environment:
-      - UPSTREAM=docker.for.mac.localhost:18080
+      - UPSTREAM=docker.for.mac.localhost:8080
     ports:
-      - "8080:8080"
-    depends_on:
-      - ui
-
-volumes:
-  simconf-ui-static:
+      - "3000:3000"
