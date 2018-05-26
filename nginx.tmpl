@@ -1,0 +1,58 @@
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    error_log stderr;
+    access_log /dev/stdout;
+
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen ${LISTEN_PORT};
+        server_name ${SERVER_NAME};
+
+        root /etc/nginx/html;
+
+        location /api {
+           proxy_pass ${UPSTREAM_PROTO}://${UPSTREAM};
+        }
+
+        # Allow injecting extra configuration into the server block
+        ${SERVER_EXTRA_CONF}
+
+        location / {
+            try_files ${ESC}uri ${ESC}uri/ /index.html;
+        }
+    }
+
+    include servers/*;
+}
+
+

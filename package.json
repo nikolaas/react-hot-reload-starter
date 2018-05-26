@@ -40,7 +40,9 @@
     "test:coverage": "jest --coverage",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js",
     "lint": "eslint --ext .js --ext .jsx src test",
-    "sass": "node-sass --recursive --watch src/theme -o dist/sass-compiled"
+    "sass": "node-sass --recursive --watch src/theme -o dist/sass-compiled",
+    "docker:build": "docker build -t react-hot-reload-starter .",
+    "docker:run": "docker run -v $PWD/nginx.tmpl:/etc/nginx/nginx.tmpl -e='UPSTREAM=docker.for.mac.localhost:8080' -d -p 3000:3000 react-hot-reload-starter"
   },
   "devDependencies": {
     "autoprefixer": "^8.2.0",
